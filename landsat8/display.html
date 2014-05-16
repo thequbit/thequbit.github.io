@@ -13,6 +13,15 @@
             <canvas id="myCanvas" width="800" height="800" style="border:1px solid #d3d3d3;">
                 Your browser does not support the HTML5 canvas tag.
             </canvas>
+            <div style="margin-left: 150px;">
+                <div style="width: 200px; margin: auto;">
+                    <button style="margin-left: 37px;" onclick="moveImage('n');"> N </button></br>
+                    <button onclick="moveImage('w');"> W </button>
+                    <button style="margin-left: 33px;" onclick="moveImage('e');"> E </button></br>
+                    <button style="margin-left: 37px;" onclick="moveImage('s');"> S </button></br>
+                    
+                </div>
+            </div>
         </div>
 
         <div style="float: left; width: 25%">
@@ -261,6 +270,45 @@
     
     //ctx.fillStyle="red";
     //ctx.fillRect(10,10,50,50);
+
+    function moveImage(direction) {
+        // get current values
+        var xoffset = parseInt(document.getElementById("xoffset").value);
+        var yoffset = parseInt(document.getElementById("yoffset").value);
+        
+        var jumpValue = 100;
+        
+        // adjust values based on button press
+        switch(direction) {
+            case 'n':
+                yoffset += jumpValue;
+                xoffset += 0;
+                break;
+            
+            case 's':
+                yoffset -= jumpValue;
+                xoffset -= 0;
+                break;
+                
+            case 'e':
+                yoffset -= 0;
+                xoffset -= jumpValue;
+                break;
+                
+            case 'w':
+                yoffset += 0;
+                xoffset += jumpValue;
+                break;
+                
+            default:
+                break;
+        };
+        
+        document.getElementById("xoffset").value = xoffset
+        document.getElementById("yoffset").value = yoffset;
+        
+        displayImage();
+    }
 
     function getValue(name) {
         var elements = document.getElementsByName(name);
