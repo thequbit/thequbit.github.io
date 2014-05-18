@@ -25,7 +25,8 @@
         </div>
 
         <div style="float: left; width: 25%">
-            
+            Image Base URL:</br>
+            <input id="baseurl" size="20" value="jpegs3"></input></br>
             Coefficients:</br>
             Red: <input id="redcoeff" type="number" size="2" value="2.5"></input>
             Green: <input id="greencoeff" type="number" size="2" value="2.5"></input>
@@ -33,6 +34,8 @@
             </br>
             XOffset: <input id="xoffset" type="number" size="4" value="-1900"></input>
             YOffset: <input id="yoffset" type="number" size="4" value="-3700"></input>
+            </br>
+            <input id="difference" type="checkbox">Difference Red/Green</input>
             </br>
             <button onclick="displayImage();">Display</button>
             </br>
@@ -179,17 +182,17 @@
         Your browser does not support the HTML5 canvas tag.
     </canvas>
 
-    <img id="img_b1" src="jpegs3/b1.jpg" width="7771" height="7591" style="display: none;"></img>
-    <img id="img_b2" src="jpegs3/b2.jpg" width="7771" height="7591" style="display: none;"></img>
-    <img id="img_b3" src="jpegs3/b3.jpg" width="7771" height="7591" style="display: none;"></img>
-    <img id="img_b4" src="jpegs3/b4.jpg" width="7771" height="7591" style="display: none;"></img>
-    <img id="img_b5" src="jpegs3/b5.jpg" width="7771" height="7591" style="display: none;"></img>
-    <img id="img_b6" src="jpegs3/b6.jpg" width="7771" height="7591" style="display: none;"></img>
-    <img id="img_b7" src="jpegs3/b7.jpg" width="7771" height="7591" style="display: none;"></img>
-    <img id="img_b8" src="jpegs3/b8.jpg" width="7771" height="7591" style="display: none;"></img>
-    <img id="img_b9" src="jpegs3/b9.jpg" width="7771" height="7591" style="display: none;"></img>
-    <img id="img_b10" src="jpegs3/b10.jpg" width="7771" height="7591" style="display: none;"></img>
-    <img id="img_b11" src="jpegs3/b11.jpg" width="7771" height="7591" style="display: none;"></img>
+    <img id="img_b1" width="7771" height="7591" style="display: none;"></img>
+    <img id="img_b2" width="7771" height="7591" style="display: none;"></img>
+    <img id="img_b3" width="7771" height="7591" style="display: none;"></img>
+    <img id="img_b4" width="7771" height="7591" style="display: none;"></img>
+    <img id="img_b5" width="7771" height="7591" style="display: none;"></img>
+    <img id="img_b6" width="7771" height="7591" style="display: none;"></img>
+    <img id="img_b7" width="7771" height="7591" style="display: none;"></img>
+    <img id="img_b8" width="7771" height="7591" style="display: none;"></img>
+    <img id="img_b9" width="7771" height="7591" style="display: none;"></img>
+    <img id="img_b10" width="7771" height="7591" style="display: none;"></img>
+    <img id="img_b11" width="7771" height="7591" style="display: none;"></img>
 
 
 <script>
@@ -212,6 +215,15 @@
 
     */
     
+    
+    // change base url
+    document.getElementById('baseurl').onkeydown = function(event) {
+        if (event.keyCode == 13) {
+            loadImages();
+        }
+    }
+    
+    // change coeff
     document.getElementById('redcoeff').onkeydown = function(event) {
         if (event.keyCode == 13) {
             displayImage();
@@ -230,6 +242,7 @@
         }
     }
     
+    // change offsets
     document.getElementById('xoffset').onkeydown = function(event) {
         if (event.keyCode == 13) {
             displayImage();
@@ -256,20 +269,49 @@
     
     var bands = {};
     
-    bands['b1'] = document.getElementById("img_b1");
-    bands['b2'] = document.getElementById("img_b2");
-    bands['b3'] = document.getElementById("img_b3");
-    bands['b4'] = document.getElementById("img_b4");
-    bands['b5'] = document.getElementById("img_b5");
-    bands['b6'] = document.getElementById("img_b6");
-    bands['b7'] = document.getElementById("img_b7");
-    bands['b8'] = document.getElementById("img_b8");
-    bands['b9'] = document.getElementById("img_b9");
-    bands['b10'] = document.getElementById("img_b10");
-    bands['b11'] = document.getElementById("img_b11");
+    function loadImages() {
     
-    //ctx.fillStyle="red";
-    //ctx.fillRect(10,10,50,50);
+        console.log('loading images ...');
+    
+        var baseurl = document.getElementById('baseurl').value;
+        
+        document.getElementById("img_b1").src = '';
+        document.getElementById("img_b2").src = '';
+        document.getElementById("img_b3").src = '';
+        document.getElementById("img_b4").src = '';
+        document.getElementById("img_b5").src = '';
+        document.getElementById("img_b6").src = '';
+        document.getElementById("img_b7").src = '';
+        document.getElementById("img_b8").src = '';
+        document.getElementById("img_b9").src = '';
+        document.getElementById("img_b10").src = '';
+        document.getElementById("img_b11").src = '';
+        
+        document.getElementById("img_b1").src = baseurl + '/b1.jpg';
+        document.getElementById("img_b2").src = baseurl + '/b2.jpg';
+        document.getElementById("img_b3").src = baseurl + '/b3.jpg';
+        document.getElementById("img_b4").src = baseurl + '/b4.jpg';
+        document.getElementById("img_b5").src = baseurl + '/b5.jpg';
+        document.getElementById("img_b6").src = baseurl + '/b6.jpg';
+        document.getElementById("img_b7").src = baseurl + '/b7.jpg';
+        document.getElementById("img_b8").src = baseurl + '/b8.jpg';
+        document.getElementById("img_b9").src = baseurl + '/b9.jpg';
+        document.getElementById("img_b10").src = baseurl + '/b10.jpg';
+        document.getElementById("img_b11").src = baseurl + '/b11.jpg';
+        
+        
+        bands['b1'] = document.getElementById("img_b1");
+        bands['b2'] = document.getElementById("img_b2");
+        bands['b3'] = document.getElementById("img_b3");
+        bands['b4'] = document.getElementById("img_b4");
+        bands['b5'] = document.getElementById("img_b5");
+        bands['b6'] = document.getElementById("img_b6");
+        bands['b7'] = document.getElementById("img_b7");
+        bands['b8'] = document.getElementById("img_b8");
+        bands['b9'] = document.getElementById("img_b9");
+        bands['b10'] = document.getElementById("img_b10");
+        bands['b11'] = document.getElementById("img_b11");
+    }
 
     function moveImage(direction) {
         // get current values
@@ -336,6 +378,9 @@
         var xoffset = document.getElementById("xoffset").value;//-1900; //-4400
         var yoffset = document.getElementById("yoffset").value;//-3700; //-1400
         
+        var difference = document.getElementById("difference").checked;
+        //alert(difference);
+        
         redctx.drawImage(bands[rval], xoffset, yoffset);
         greenctx.drawImage(bands[gval], xoffset, yoffset);
         bluectx.drawImage(bands[bval], xoffset, yoffset);
@@ -376,9 +421,26 @@
         var newData = [];
         while ((i += 4) < length) {
             count++;
-            imgData.data[i+0] = redData.data[i+0]*R_COEFF;     // red
-            imgData.data[i+1] = greenData.data[i+0]*G_COEFF;   // green
-            imgData.data[i+2] = blueData.data[i+0]*B_COEFF;    // blue
+            if ( difference ) {
+                var val = (greenData.data[i+0]*G_COEFF) - (redData.data[i+0]*R_COEFF);
+                
+                imgData.data[i+0] = val;    // red
+                
+                if ( val > 128 ) {
+                    imgData.data[i+1] = 255;    // green
+                }
+                else {
+                    imgData.data[i+1] = 0;
+                }
+                
+                imgData.data[i+2] = blueData.data[i+0]*B_COEFF   // blue
+                
+            }
+            else {
+                imgData.data[i+0] = redData.data[i+0]*R_COEFF;     // red
+                imgData.data[i+1] = greenData.data[i+0]*G_COEFF;   // green
+                imgData.data[i+2] = blueData.data[i+0]*B_COEFF;    // blue
+            }
             imgData.data[i+3] = 255;                                   // alpha
             count += 1;
         }
@@ -391,6 +453,7 @@
         ctx.putImageData(imgData,0,0);
     }
     
+    loadImages();
     displayImage();
     
 </script>
