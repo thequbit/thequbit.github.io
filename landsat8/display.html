@@ -425,7 +425,10 @@
                 var val = (greenData.data[i+0]*G_COEFF) - (redData.data[i+0]*R_COEFF);
                 
                 imgData.data[i+0] = val;    // red
+                imgData.data[i+1] = val;    // green
+                imgData.data[i+2] = val;    // blue
                 
+                /*
                 if ( val > 128 ) {
                     imgData.data[i+1] = 255;    // green
                 }
@@ -434,7 +437,7 @@
                 }
                 
                 imgData.data[i+2] = blueData.data[i+0]*B_COEFF   // blue
-                
+                */
             }
             else {
                 imgData.data[i+0] = redData.data[i+0]*R_COEFF;     // red
